@@ -8,12 +8,17 @@ import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.BODY;
 import static io.restassured.filter.log.LogDetail.STATUS;
+import static io.restassured.http.ContentType.JSON;
 
 public class UserSpec {
     public static RequestSpecification requestSpec = with()
             .filter(withCustomTemplates())
-            .log().uri();
-
+            .log().all()
+            .contentType(JSON);
+    public static RequestSpecification requestPostSpec = with()
+            .filter(withCustomTemplates())
+            .log().all()
+            .contentType(JSON);
     public static ResponseSpecification userResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .log(STATUS)
@@ -30,12 +35,18 @@ public class UserSpec {
             .log(BODY)
             .build();
 
+    public static ResponseSpecification response204Spec = new ResponseSpecBuilder()
+            .expectStatusCode(204)
+            .log(STATUS)
+            .log(BODY)
+            .build();
+
     public static RequestSpecification usersListRequestSpec = with()
             .filter(withCustomTemplates())
             .log().uri();
 
-    public static ResponseSpecification usersListResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
+    public static ResponseSpecification userResponse201Spec = new ResponseSpecBuilder()
+            .expectStatusCode(201)
             .log(STATUS)
             .log(BODY)
             .build();

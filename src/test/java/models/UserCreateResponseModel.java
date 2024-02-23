@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Support {
-    String url;
+public class UserCreateResponseModel {
+    String name;
+    String job;
 }
